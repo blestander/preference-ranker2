@@ -3,6 +3,18 @@ html, body {
     font-family: sans-serif;
 }
 
+body {
+    background-color: lightblue;
+    color: black;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    body {
+        background-color: #000020;
+        color: whitesmoke;
+    }
+}
+
 .container {
     display: flex;
     flex-direction: column;
