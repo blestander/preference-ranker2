@@ -6,13 +6,7 @@ html, body {
 body {
     background-color: lightblue;
     color: black;
-}
-
-@media screen and (prefers-color-scheme: dark) {
-    body {
-        background-color: #000020;
-        color: whitesmoke;
-    }
+    text-align: center;
 }
 
 .container {
@@ -27,6 +21,34 @@ body {
 .spacer {
     flex-grow: 100;
 }
-h1, footer, p {
-    text-align: center;
+
+button {
+    background-color: goldenrod;
+    color: black;
+    box-shadow: none;
+    border: none;
+    border-radius: .25em;
+    padding: .5em;
+}
+button:active {
+    border-style: inset;
+    border-width: .1em;
+    padding: .4em;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    body {
+        background-color: #000020;
+        color: whitesmoke;
+    }
+}
+
+@media print {
+    body {
+        background-color: white;
+        color: black;
+    }
+    footer {
+        margin-bottom: 1em;
+    }
 }
