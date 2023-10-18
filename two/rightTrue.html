@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Performance Ranker</title>
+        <link rel="stylesheet" type="text/css" href="/styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Performance Ranker</h1>
+            <p>A simple tool for turning a series of preference questions into a ranked list.</p>
+            <button id="both"></button>
+            <button id="left"></button>
+            <div class="spacer"></div>
+            <footer>Copyright &copy; 2023 Brendan Lestander</footer>
+        </div>
+
+        <script>
+            function swap(items, i, j) {
+                const temp = items[i];
+                items[i] = items[j];
+                items[j] = temp;
+            }
+
+            const params = new URLSearchParams(location.search);
+            if (!(params.has('items') && params.has('i') && params.has('j')))
+                location.replace('/');
+            
+            const items = JSON.parse(params.get('items'));
+            const i = Number.parseInt(params.get('i'))
+            const j = Number.parseInt(params.get('j'));
+            const leftChild = 2 * j + 1;
+            const rightChild = 2 * j + 2;
+
+            const bothButton = document.getElementById('both');
+            bothButton.textContent = items[rightChild];
+            bothButton.addEventListener('click', function () {
+                location.assign(`/two/both.html?${params}`);
+            });
+
+            const leftButton = document.getElementById('left');
+            leftButton.textContent = items[j];
+        </script>
+    </body>
+</html>
