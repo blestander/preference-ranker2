@@ -38,8 +38,8 @@
                     swap(items, j, leftChild);
                     const leftGrandChild = 2 * leftChild + 1;
                     if (leftGrandChild >= i) { // Left child has no left child
-                        if (i > 1) { // There are still out of place elements
-                            swap(items, i, 0)
+                        if (i >= 1) { // There are still out of place elements
+                            swap(items, i - 1, 0)
                             const newParams = new URLSearchParams({
                                 items: JSON.stringify(items),
                                 i: i - 1,
@@ -50,7 +50,7 @@
                             const newParams = new URLSearchParams({
                                 items: JSON.stringify(items)
                             });
-                            location.assign(`/list.html?${newParamas}`);
+                            location.assign(`/list.html?${newParams}`);
                         }
                     } else {// Left child has a left child
                         const newParams = new URLSearchParams({
