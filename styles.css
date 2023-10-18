@@ -36,6 +36,9 @@ h2 {
 p {
     font-family: 'Open Sans', sans-serif;
 }
+a {
+    color: inherit;
+}
 
 button {
     background-color: goldenrod;
