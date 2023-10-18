@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Performance Ranker</title>
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>Performance Ranker</h1>
+            <p>A simple tool for turning a series of preference questions into a ranked list.</p>
+            <button id="advance"></button>
+            <button id="stay"></button>
+            <div class="spacer"></div>
+            <footer>Copyright &copy; 2023 Brendan Lestander</footer>
+        </div>
+
+        <script>
+            const params = new URLSearchParams(location.search);
+            if (!(params.has('items') && params.has('i') && params.has('j')))
+                location.replace('/');
+
+            const items = JSON.parse(params.get('items'));
+            const i = Number.parseInt(params.get('i'));
+            const j = Number.parseInt(params.get('j'));
+            const parent = Math.floor((j - 1) / 2);
+
+            const itemJ = items[j];
+            const parentItem = items[parent];
+
+            document.getElementById('advance').textContent = itemJ;
+
+            const stayButton = document.getElementById('stay');
+            stayButton.textContent = parentItem;
+            stayButton.addEventListener('click', function () {
+                const newI = i + 1;
+                if (newI < items.length) {
+                    const newParams = new URLSearchParams({
+                        items: JSON.stringify(items),
+                        i: newI,
+                        j: newI,
+                    })
+                    location.assign(`/one.html?${newParams}`);
+                } else
+                    console.log('Done');
+            });
+
+        </script>
+    </body>
+</html>
