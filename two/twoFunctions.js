@@ -9,6 +9,7 @@ function swap(items, i, j) {
 function shiftDownLeft(items, i, j) {
     const leftChild = 2 * j + 1;
     items = swap(items, j, leftChild);
+    console.debug(items);
     const leftGrandChild = 2 * leftChild + 1;
     if (leftGrandChild >= i) { // Left child has no left child
         if (i > 1) { // There are still out of place elements
@@ -20,6 +21,7 @@ function shiftDownLeft(items, i, j) {
             });
             location.assign(`/two/left.html?${newParams}`)
         } else { // No more out of place elements
+            items = swap(items, 0, 1);
             const newParams = new URLSearchParams({
                 items: JSON.stringify(items)
             });
@@ -49,6 +51,7 @@ function shiftDownRight(items, i, j) {
             });
             location.assign(`/two/left.html?${newParams}`)
         } else { // No more out of place elements
+            items = swap(items, 0, 1);
             const newParams = new URLSearchParams({
                 items: JSON.stringify(items)
             });
@@ -74,6 +77,7 @@ function stay(items, i) {
         });
         location.assign(`/two/left.html?${newParams}`)
     } else { // No more out of place elements
+        items = swap(items, 0, 1);
         const newParams = new URLSearchParams({
             items: JSON.stringify(items)
         });
