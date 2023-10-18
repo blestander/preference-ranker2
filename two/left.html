@@ -26,10 +26,12 @@
             const leftChild = 2 * j + 1;
             const rightChild = 2 * j + 2;
 
+            console.debug(items, i, j);
+
             const yesButton = document.getElementById('yes');
             yesButton.textContent = items[leftChild];
             yesButton.addEventListener('click', function () {
-                console.debug(rightChild, i);
+                console.debug('Yes', rightChild, i);
                 if (rightChild >= i) { // Only has left child
                     shiftDownLeft(items, i, j);
                 } else // Has right child
