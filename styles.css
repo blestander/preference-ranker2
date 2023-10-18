@@ -4,7 +4,7 @@ html, body {
 }
 
 body {
-    background-color: lightblue;
+    background-color: lightskyblue;
     color: black;
     text-align: center;
 }
@@ -37,10 +37,26 @@ button:active {
     padding: .4em;
 }
 
+textarea {
+    height: 150px;
+    background-color: inherit;
+    color: inherit;
+    border-style: solid;
+    border-color: black;
+    border-radius: .25em;
+}
+textarea:focus{
+    border-color: goldenrod;
+    outline: none;
+}
+
 @media screen and (prefers-color-scheme: dark) {
     body {
         background-color: #000020;
         color: whitesmoke;
+    }
+    textarea {
+        border-color: whitesmoke;
     }
 }
 
@@ -51,5 +67,8 @@ button:active {
     }
     footer {
         margin-bottom: 1em;
+    }
+    textarea {
+        border-color: black;
     }
 }
