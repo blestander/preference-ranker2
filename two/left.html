@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Performance Ranker</title>
+        <link rel="stylesheet" type="text/css" href="/styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Performance Ranker</h1>
+            <p>A simple tool for turning a series of preference questions into a ranked list.</p>
+            <button id="yes"></button>
+            <button id="no"></button>
+            <div class="spacer"></div>
+            <footer>Copyright &copy; 2023 Brendan Lestander</footer>
+        </div>
+
+        <script>
+            function swap(items, i, j) {
+                const temp = items[i];
+                items[i] = items[j];
+                items[j] = temp;
+            }
+
+            const params = new URLSearchParams(location.search);
+            if (!(params.has('items') && params.has('i') && params.has('j')))
+                location.replace('/');
+            
+            const items = JSON.parse(params.get('items'));
+            const i = Number.parseInt(params.get('i'))
+            const j = Number.parseInt(params.get('j'));
+            const leftChild = 2 * j + 1;
+            const rightChild = 2 * j + 2;
+
+            const yesButton = document.getElementById('yes');
+            yesButton.textContent = items[leftChild];
+            yesButton.addEventListener('click', function () {
+                if (rightChild >= i) { // Only has left child
+                    swap(items, j, leftChild);
+                    const leftGrandChild = 2 * leftChild + 1;
+                    if (leftGrandChild >= i) { // Left child has no left child
+                        if (i > 1) { // There are still out of place elements
+                            swap(items, i, 0)
+                            const newParams = new URLSearchParams({
+                                items: JSON.stringify(items),
+                                i: i - 1,
+                                j: 0
+                            });
+                            location.assign(`/two/left.html?${newParams}`)
+                        } else { // No more out of place elements
+                            const newParams = new URLSearchParams({
+                                items: JSON.stringify(items)
+                            });
+                            location.assign(`/list.html?${newParamas}`);
+                        }
+                    } else {// Left child has a left child
+                        const newParams = new URLSearchParams({
+                            items: JSON.stringify(items),
+                            i: i,
+                            j: leftChild
+                        });
+                        location.assign(`/two/left.html?${newParams}`);
+                    }
+                } else // Has right child
+                    location.assign(`/two/rightTrue.html?${params}`);
+            });
+
+            const noButton = document.getElementById('no');
+            noButton.textContent = items[j];
+        </script>
+    </body>
+</html>

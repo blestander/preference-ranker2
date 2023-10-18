@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Performance Ranker</title>
-        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="stylesheet" type="text/css" href="/styles.css">
     </head>
     <body>
         <div class="container">
@@ -21,7 +21,7 @@
                 const rawItems = document.getElementById('items').value;
                 const items = rawItems.split('\n').map(s => s.trim()).filter(s => s.length > 0);
                 const params = new URLSearchParams({items: JSON.stringify(items), i: 1, j: 1})
-                location.assign(`/one.html?${params}`)
+                location.assign(`/one.html?${params}`);
             });
         </script>
     </body>

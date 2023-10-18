@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Performance Ranker</title>
-        <link rel="stylesheet" type="text/css" href="styles.css" />
+        <link rel="stylesheet" type="text/css" href="/styles.css" />
     </head>
     <body>
         <div class="container">
@@ -24,8 +24,17 @@
                         j: newI,
                     })
                     location.assign(`/one.html?${newParams}`);
-                } else
-                    console.log('Done');
+                } else {
+                    const swap = items[i];
+                    items[i] = items[0];
+                    items[0] = swap;
+                    const newParams = new URLSearchParams({
+                        items: JSON.stringify(items),
+                        i: i,
+                        j: 0,
+                    });
+                    location.assign(`/two/left.html?${newParams}`);
+                }
             }
 
             const params = new URLSearchParams(location.search);
