@@ -16,7 +16,8 @@ body {
     flex-direction: column;
     flex-wrap: nowrap;
     min-height: 100svh;
-    width: fit-content;
+    width: 800px;
+    max-width: 97vw;
     margin-left: auto;
     margin-right: auto;
 }
@@ -60,6 +61,7 @@ textarea {
     border-color: black;
     border-radius: .25em;
     font-family: Inconsolata, monospace;
+    text-align: inherit;
 }
 textarea:focus{
     border-color: goldenrod;
