@@ -9,10 +9,20 @@
             <h1>Performance Ranker</h1>
             <p>A simple tool for turning a series of preference questions into a ranked list.</p>
 
-            <textarea></textarea>
-            <button>Start Ranking</button>
+            <textarea id="items"></textarea>
+            <button id="start">Start Ranking</button>
             <div class="spacer"></div>
             <footer>Copyright &copy; 2023 Brendan Lestander</footer>
         </div>
+
+        <script defer>
+            const submitButton = document.getElementById('start');
+            submitButton.addEventListener('click', () => {
+                const rawItems = document.getElementById('items').value;
+                const items = rawItems.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+                const params = new URLSearchParams({items: JSON.stringify(items)})
+                location.assign(`/one.html?${params}`)
+            });
+        </script>
     </body>
 </html>
