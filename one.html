@@ -15,6 +15,19 @@
         </div>
 
         <script>
+            function moveOn(items, i) {
+                const newI = i + 1;
+                if (newI < items.length) {
+                    const newParams = new URLSearchParams({
+                        items: JSON.stringify(items),
+                        i: newI,
+                        j: newI,
+                    })
+                    location.assign(`/one.html?${newParams}`);
+                } else
+                    console.log('Done');
+            }
+
             const params = new URLSearchParams(location.search);
             if (!(params.has('items') && params.has('i') && params.has('j')))
                 location.replace('/');
@@ -27,22 +40,28 @@
             const itemJ = items[j];
             const parentItem = items[parent];
 
-            document.getElementById('advance').textContent = itemJ;
+            const advanceButton = document.getElementById('advance')
+            advanceButton.textContent = itemJ;
+            advanceButton.addEventListener('click', function () {
+                swap = items[j];
+                items[j] = items[parent];
+                items[parent] = swap;
+
+                if (parent == 0)
+                    moveOn(items, i);
+                else {
+                    const newParams = new URLSearchParams({
+                        items: JSON.stringify(items),
+                        i: i,
+                        j: parent,
+                    });
+                    location.assign(`one.html?${newParams}`);
+                }
+            })
 
             const stayButton = document.getElementById('stay');
             stayButton.textContent = parentItem;
-            stayButton.addEventListener('click', function () {
-                const newI = i + 1;
-                if (newI < items.length) {
-                    const newParams = new URLSearchParams({
-                        items: JSON.stringify(items),
-                        i: newI,
-                        j: newI,
-                    })
-                    location.assign(`/one.html?${newParams}`);
-                } else
-                    console.log('Done');
-            });
+            stayButton.addEventListener('click', () => moveOn(items, i));
 
         </script>
     </body>
