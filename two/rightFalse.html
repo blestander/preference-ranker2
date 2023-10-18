@@ -3,14 +3,14 @@
     <head>
         <title>Performance Ranker</title>
         <link rel="stylesheet" type="text/css" href="/styles.css">
-        <script src="twoFunctions.js"></script>
+        <script src="/two/twoFunctions.js"></script>
     </head>
     <body>
         <div class="container">
             <h1>Performance Ranker</h1>
             <p>A simple tool for turning a series of preference questions into a ranked list.</p>
-            <button id="yes"></button>
-            <button id="no"></button>
+            <button id="right"></button>
+            <button id="neither"></button>
             <div class="spacer"></div>
             <footer>Copyright &copy; 2023 Brendan Lestander</footer>
         </div>
@@ -26,23 +26,13 @@
             const leftChild = 2 * j + 1;
             const rightChild = 2 * j + 2;
 
-            const yesButton = document.getElementById('yes');
-            yesButton.textContent = items[leftChild];
-            yesButton.addEventListener('click', function () {
-                if (rightChild >= i) { // Only has left child
-                    shiftDownLeft(items, i, j);
-                } else // Has right child
-                    location.assign(`/two/rightTrue.html?${params}`);
-            });
+            const rightButton = document.getElementById('right');
+            rightButton.textContent = items[rightChild];
+            rightButton.addEventListener('click', () => shiftDownRight(items, i, j));
 
-            const noButton = document.getElementById('no');
-            noButton.textContent = items[j];
-            noButton.addEventListener('click', function() {
-                if (rightChild >= i) // Only has left child
-                    stay(items, i);
-                else // Has right child
-                    location.assign(`two/rightfalse.html?${params}`);
-            })
+            const neitherButton = document.getElementById('neither');
+            neitherButton.textContent = items[j];
+            rightButton.addEventListener('click', () => stay(items, i));
         </script>
     </body>
 </html>

@@ -16,12 +16,6 @@
         </div>
 
         <script>
-            function swap(items, i, j) {
-                const temp = items[i];
-                items[i] = items[j];
-                items[j] = temp;
-            }
-
             const params = new URLSearchParams(location.search);
             if (!(params.has('items') && params.has('i') && params.has('j')))
                 location.replace('/');
