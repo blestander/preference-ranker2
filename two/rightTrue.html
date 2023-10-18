@@ -3,6 +3,7 @@
     <head>
         <title>Performance Ranker</title>
         <link rel="stylesheet" type="text/css" href="/styles.css">
+        <script src="/two/twoFunctions.js"></script>
     </head>
     <body>
         <div class="container">
@@ -39,33 +40,7 @@
 
             const leftButton = document.getElementById('left');
             leftButton.textContent = items[j];
-            leftButton.addEventListener('click', function () {
-                swap(items, j, leftChild);
-                const leftGrandChild = 2 * leftChild + 1;
-                if (leftGrandChild >= i) { // Left child has no left child
-                    if (i >= 1) { // There are still out of place elements
-                        swap(items, i - 1, 0)
-                        const newParams = new URLSearchParams({
-                            items: JSON.stringify(items),
-                            i: i - 1,
-                            j: 0
-                        });
-                        location.assign(`/two/left.html?${newParams}`)
-                    } else { // No more out of place elements
-                        const newParams = new URLSearchParams({
-                            items: JSON.stringify(items)
-                        });
-                        location.assign(`/list.html?${newParams}`);
-                    }
-                } else { // Left child has a left child
-                    const newParams = new URLSearchParams({
-                        items: JSON.stringify(items),
-                        i: i,
-                        j: leftChild
-                    });
-                    location.assign(`/two/left.html?${newParams}`);
-                }
-            })
+            leftButton.addEventListener('click', () => shiftDownLeft(items, i, j));
         </script>
     </body>
 </html>

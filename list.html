@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Performance Ranker</title>
+        <link rel="stylesheet" type="text/css" href="/styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Performance Ranker</h1>
+            <p>A simple tool for turning a series of preference questions into a ranked list.</p>
+            <ol id="list"></ol>
+            <div class="spacer"></div>
+            <footer>Copyright &copy; 2023 Brendan Lestander</footer>
+        </div>
+
+        <script>
+            const params = new URLSearchParams(location.search);
+            if (!params.has('items'))
+                location.replace('/');
+            
+            const items = JSON.parse(params.get('items'));
+            
+            const ol = document.getElementById('list');
+            for (let i = items.length - 1; i >= 0; i--) {
+                const li = document.createElement('li');
+                li.textContent = items[i];
+                ol.appendChild(li);
+            }
+        </script>
+    </body>
+</html>
