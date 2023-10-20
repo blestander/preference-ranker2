@@ -49,6 +49,7 @@ button {
     padding: .5em;
     margin-bottom: .25em;
     font-family: 'Open Sans', sans-serif;
+    cursor: pointer;
 }
 button:active {
     border-style: inset;
