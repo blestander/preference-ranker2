@@ -6,8 +6,8 @@ html, body {
 }
 
 body {
-    background-color: lightskyblue;
-    color: black;
+    background-color: #000020;
+    color: whitesmoke;
     text-align: center;
 }
 
@@ -59,10 +59,10 @@ button:active {
 
 textarea {
     height: 150px;
-    background-color: #F0F0F0;
-    color: inherit;
+    background-color: #202020;
+    color: whitesmoke;
     border-style: solid;
-    border-color: black;
+    border-color: white;
     border-radius: .25em;
     font-family: Inconsolata, monospace;
     text-align: inherit;
@@ -72,20 +72,20 @@ textarea:focus{
     outline: none;
 }
 
-@media screen and (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: light) {
     body {
-        background-color: #000020;
-        color: whitesmoke;
+        background-color: lightskyblue;
+        color: black;
     }
     button {
-        background-color: goldenrod;
+        background-color: golden;
     }
     textarea {
-        background-color: #202020;
-        border-color: whitesmoke;
+        background-color: #F0F0F0;
+        border-color: black;
     }
     textarea:focus {
-        border-color: goldenrod;
+        border-color: gold;
     }
 }
 
