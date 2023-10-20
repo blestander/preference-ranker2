@@ -41,7 +41,7 @@ a {
 }
 
 button {
-    background-color: goldenrod;
+    background-color: gold;
     color: black;
     box-shadow: none;
     border: none;
@@ -59,7 +59,7 @@ button:active {
 
 textarea {
     height: 150px;
-    background-color: lightgray;
+    background-color: #F0F0F0;
     color: inherit;
     border-style: solid;
     border-color: black;
@@ -76,6 +76,9 @@ textarea:focus{
     body {
         background-color: #000020;
         color: whitesmoke;
+    }
+    button {
+        background-color: goldenrod;
     }
     textarea {
         background-color: #202020;
