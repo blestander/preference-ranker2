@@ -10,6 +10,9 @@
             <h1>Performance Ranker</h1>
             <p>A simple tool for turning a series of preference questions into a ranked list.</p>
             <p id="state"></p>
+            <button id="extend"></button>
+            <button id="cut"></button>
+            <p><a href="/">Reset</a></p>
             <div class="spacer"></div>
             <footer>
                 Copyright &copy; 2023 Brendan Lestander
@@ -18,10 +21,17 @@
             </footer>
 
             <script defer>
+                // Retrieve query params
                 const queryParams = new URLSearchParams(location.search);
-                const currentRun = JSON.parse(queryParams.get('currentRun'));
-                const unprocessed = JSON.parse(queryParams.get('unprocessed'));
+                const currentRun = JSON.parse(queryParams.get('currentRun')); // string[]
+                const unprocessed = JSON.parse(queryParams.get('unprocessed')); // string[]
                 document.getElementById('state').innerText = `Current Run: ${currentRun.join(', ')}\nUnprocessed: ${unprocessed.join(', ')}`
+            
+                // Populate buttons
+                const extendButton = document.getElementById('extend');
+                extendButton.textContent = currentRun[currentRun.length - 1];
+                const cutButton = document.getElementById('cut');
+                cutButton.textContent = unprocessed[0];
             </script>
         </div>
     </body>
