@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Performance Ranker</title>
+        <link rel="stylesheet" type="text/css" href="/styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script type="text/javascript" src="quick.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Performance Ranker</h1>
+            <p>A simple tool for turning a series of preference questions into a ranked list.</p>
+            <p>Initializing...</p>
+            <div class="spacer"></div>
+            <footer>
+                Copyright &copy; 2023 Brendan Lestander
+                <br />
+                Available under the <a href="/license.html">MIT License.</a>
+            </footer>
+        </div>
+
+        <script defer>
+            const currentItems = getCurrentItems();
+            
+            // If it's even worth partitioning
+            if (currentItems.length > 7) {
+                const pivotIndex = Math.floor(Math.random() * currentItems.length);
+                const pivotingItems = swap(currentItems, pivotIndex, currentItems.length - 1);
+            } else if (currentItems.length > 1) { // If we should just use insertion sort
+                const newParams = new URLSearchParams({
+                    sorted: JSON.stringify([]),
+                    current: JSON.stringify(currentItems),
+                    next: JSON.stringify([]),
+                    i: 1,
+                    j
+                })
+            } else // The array is so short that it is automatically sorteded
+                location.replace(`/list.html?items=${JSON.stringify(currentItems)}`);
+        </script>
+    </body>
+</html>
