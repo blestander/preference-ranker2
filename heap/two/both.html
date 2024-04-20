@@ -4,14 +4,14 @@
         <title>Performance Ranker</title>
         <link rel="stylesheet" type="text/css" href="/styles.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="twoFunctions.js"></script>
+        <script src="/heap/two/twoFunctions.js"></script>
     </head>
     <body>
         <div class="container">
             <h1>Performance Ranker</h1>
             <p>A simple tool for turning a series of preference questions into a ranked list.</p>
-            <button id="yes"></button>
-            <button id="no"></button>
+            <button id="left"></button>
+            <button id="right"></button>
             <p><a href="/">Reset</a></p>
             <div class="spacer"></div>
             <footer>
@@ -32,27 +32,13 @@
             const leftChild = 2 * j + 1;
             const rightChild = 2 * j + 2;
 
-            console.debug(items, i, j);
+            const leftButton = document.getElementById('left');
+            leftButton.textContent = items[leftChild];
+            leftButton.addEventListener('click', () => shiftDownLeft(items, i, j))
 
-            const yesButton = document.getElementById('yes');
-            yesButton.textContent = items[leftChild];
-            yesButton.addEventListener('click', function () {
-                console.debug('Yes', rightChild, i);
-                if (rightChild >= i) { // Only has left child
-                    shiftDownLeft(items, i, j);
-                } else // Has right child
-                    location.assign(`/two/rightTrue.html?${params}`);
-            });
-
-            const noButton = document.getElementById('no');
-            noButton.textContent = items[j];
-            noButton.addEventListener('click', function() {
-                console.debug(rightChild, i);
-                if (rightChild >= i) // Only has left child
-                    stay(items, i);
-                else // Has right child
-                    location.assign(`/two/rightFalse.html?${params}`);
-            })
+            const rightButton = document.getElementById('right');
+            rightButton.textContent = items[rightChild];
+            rightButton.addEventListener('click', () => shiftDownRight(items, i, j));
         </script>
     </body>
 </html>

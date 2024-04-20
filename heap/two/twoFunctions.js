@@ -19,7 +19,7 @@ function shiftDownLeft(items, i, j) {
                 i: i - 1,
                 j: 0
             });
-            location.assign(`/two/left.html?${newParams}`)
+            location.assign(`/heap/two/left.html?${newParams}`)
         } else { // No more out of place elements
             items = swap(items, 0, 1);
             const newParams = new URLSearchParams({
@@ -33,7 +33,7 @@ function shiftDownLeft(items, i, j) {
             i: i,
             j: leftChild
         });
-        location.assign(`/two/left.html?${newParams}`);
+        location.assign(`/heap/two/left.html?${newParams}`);
     }
 }
 
@@ -49,7 +49,7 @@ function shiftDownRight(items, i, j) {
                 i: i - 1,
                 j: 0
             });
-            location.assign(`/two/left.html?${newParams}`)
+            location.assign(`/heap/two/left.html?${newParams}`)
         } else { // No more out of place elements
             items = swap(items, 0, 1);
             const newParams = new URLSearchParams({
@@ -63,7 +63,7 @@ function shiftDownRight(items, i, j) {
             i: i,
             j: rightChild
         });
-        location.assign(`/two/left.html?${newParams}`);
+        location.assign(`/heap/two/left.html?${newParams}`);
     }
 }
 
@@ -75,7 +75,7 @@ function stay(items, i) {
             i: i - 1,
             j: 0
         });
-        location.assign(`/two/left.html?${newParams}`)
+        location.assign(`/heap/two/left.html?${newParams}`)
     } else { // No more out of place elements
         items = swap(items, 0, 1);
         const newParams = new URLSearchParams({

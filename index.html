@@ -40,7 +40,7 @@
                 const rawItems = document.getElementById('items').value;
                 const items = rawItems.split('\n').map(s => s.trim()).filter(s => s.length > 0);
                 const params = new URLSearchParams({items: JSON.stringify(items), i: 1, j: 1})
-                location.assign(`/one.html?${params}`);
+                location.assign(`/heap/one.html?${params}`);
             });
         </script>
     </body>

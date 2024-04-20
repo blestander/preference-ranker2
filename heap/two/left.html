@@ -4,14 +4,14 @@
         <title>Performance Ranker</title>
         <link rel="stylesheet" type="text/css" href="/styles.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="/two/twoFunctions.js"></script>
+        <script src="/heap/two/twoFunctions.js"></script>
     </head>
     <body>
         <div class="container">
             <h1>Performance Ranker</h1>
             <p>A simple tool for turning a series of preference questions into a ranked list.</p>
-            <button id="both"></button>
-            <button id="left"></button>
+            <button id="yes"></button>
+            <button id="no"></button>
             <p><a href="/">Reset</a></p>
             <div class="spacer"></div>
             <footer>
@@ -32,15 +32,27 @@
             const leftChild = 2 * j + 1;
             const rightChild = 2 * j + 2;
 
-            const bothButton = document.getElementById('both');
-            bothButton.textContent = items[rightChild];
-            bothButton.addEventListener('click', function () {
-                location.assign(`/two/both.html?${params}`);
+            console.debug(items, i, j);
+
+            const yesButton = document.getElementById('yes');
+            yesButton.textContent = items[leftChild];
+            yesButton.addEventListener('click', function () {
+                console.debug('Yes', rightChild, i);
+                if (rightChild >= i) { // Only has left child
+                    shiftDownLeft(items, i, j);
+                } else // Has right child
+                    location.assign(`/heap/two/rightTrue.html?${params}`);
             });
 
-            const leftButton = document.getElementById('left');
-            leftButton.textContent = items[j];
-            leftButton.addEventListener('click', () => shiftDownLeft(items, i, j));
+            const noButton = document.getElementById('no');
+            noButton.textContent = items[j];
+            noButton.addEventListener('click', function() {
+                console.debug(rightChild, i);
+                if (rightChild >= i) // Only has left child
+                    stay(items, i);
+                else // Has right child
+                    location.assign(`/heap/two/rightFalse.html?${params}`);
+            })
         </script>
     </body>
 </html>
