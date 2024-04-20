@@ -26,7 +26,7 @@
 
             <textarea id="items"></textarea>
             <button id="startQuick">Start Ranking (Unsorted)</button>
-            <button id="startTim">Start Ranking (Partially Sorted)</button>
+            <!-- <button id="startTim" disabled="disabled">Start Ranking (Partially Sorted)</button> -->
             <button id="startHeap">Start Ranking (Legacy)</button>
             <div class="spacer"></div>
             <footer>
@@ -49,12 +49,12 @@
                 const params = new URLSearchParams({items: JSON.stringify(items)});
                 location.assign(`/quick?${params}`)
             })
-            const timSubmitButton = document.getElementById('startTim');
-            timSubmitButton.addEventListener('click', () => {
-                const items = extractItems();
-                const params = new URLSearchParams({items: JSON.stringify(items)});
-                location.assign(`/tim/start.html?${params}`);
-            })
+            // const timSubmitButton = document.getElementById('startTim');
+            // timSubmitButton.addEventListener('click', () => {
+            //     const items = extractItems();
+            //     const params = new URLSearchParams({items: JSON.stringify(items)});
+            //     location.assign(`/tim/start.html?${params}`);
+            // })
             const heapSubmitButton = document.getElementById('startHeap');
             heapSubmitButton.addEventListener('click', () => {
                 const items = extractItems();
