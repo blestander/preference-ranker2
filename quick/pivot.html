@@ -27,6 +27,19 @@
 
             if (current.length > 7) { // Worth partitioning
                 console.debug("Partition")
+                const pivotedItems = current.slice();
+                const pivotIndex = Math.floor(Math.random() * pivotedItems.length);
+                const swap = pivotedItems[pivotIndex];
+                pivotedItems[pivotIndex] = pivotedItems[pivotedItems.length - 1];
+                pivotedItems[pivotedItems.length - 1] = swap;
+                const newParams = new URLSearchParams({
+                    insertable: JSON.stringify(insertable),
+                    current: JSON.stringify(pivotedItems),
+                    next: JSON.stringify(next),
+                    i: 0,
+                    j: pivotedItems.length - 2
+                });
+                location.replace(`left.html?${newParams}`);
             } else { // Just insertion sort
                 console.debug("Just insertion sort")
                 const newInsertable = insertable.slice();
