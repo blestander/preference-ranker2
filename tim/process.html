@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Performance Ranker</title>
+        <link rel="stylesheet" type="text/css" href="/styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Performance Ranker</h1>
+            <p>A simple tool for turning a series of preference questions into a ranked list.</p>
+            <p id="state"></p>
+            <div class="spacer"></div>
+            <footer>
+                Copyright &copy; 2023 Brendan Lestander
+                <br />
+                Available under the <a href="/license.html">MIT License.</a>
+            </footer>
+
+            <script defer>
+                const queryParams = new URLSearchParams(location.search);
+                const currentRun = JSON.parse(queryParams.get('currentRun'));
+                const unprocessed = JSON.parse(queryParams.get('unprocessed'));
+                document.getElementById('state').innerText = `Current Run: ${currentRun.join(', ')}\nUnprocessed: ${unprocessed.join(', ')}`
+            </script>
+        </div>
+    </body>
+</html>
