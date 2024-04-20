@@ -1,7 +1,3 @@
-function getCurrentItems() {
-    return JSON.parse(new URLSearchParams(location.search).get('current'));
-}
-
 function swap(list, a, b) {
     list = list.slice();
     const temp = list[a];

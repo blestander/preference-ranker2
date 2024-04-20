@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Performance Ranker</title>
+        <link rel="stylesheet" type="text/css" href="/styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script type="text/javascript" src="quick.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Performance Ranker</h1>
+            <p>A simple tool for turning a series of preference questions into a ranked list.</p>
+            <p id="state"></p>
+            <button id="swap"></button>
+            <button id="stay"></button>
+            <p><a href="/">Reset</a></p>
+            <div class="spacer"></div>
+            <footer>
+                Copyright &copy; 2023 Brendan Lestander
+                <br />
+                Available under the <a href="/license.html">MIT License.</a>
+            </footer>
+        </div>
+
+        <script defer>
+            // Get elements and search params
+            const queryParams = new URLSearchParams(location.search);
+            const currentItems = JSON.parse(queryParams.get('items'));
+            const i =  Number.parseInt(queryParams.get('i'));
+            const j = Number.parseInt(queryParams.get('j'));
+            const swapButton = document.getElementById('swap');
+            const stayButton = document.getElementById('stay');
+
+            // Populate buttons
+            swapButton.textContent = currentItems[j - 1];
+            stayButton.textContent = currentItems[j];
+            document.getElementById('state').textContent = `Current Items: ${currentItems.join(', ')}`;
+
+            // Stay logic
+            stayButton.addEventListener('click', () => {
+                const newI = i + 1;
+                if (newI < currentItems.length) { // Still more items to sort
+                    const newParams = new URLSearchParams(location.search);
+                    newParams.set('i', newI);
+                    newParams.set('j', newI);
+                    location.assign(`/quick/insert.html?${newParams}`);
+                } else { // End of this array
+                    location.assign(`/list.html?items=${JSON.stringify(currentItems)}`);
+                }
+            });
+        </script>
+    </body>
+</html>
