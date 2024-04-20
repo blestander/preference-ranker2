@@ -25,7 +25,8 @@
             <p>A simple tool for turning a series of preference questions into a ranked list.</p>
 
             <textarea id="items"></textarea>
-            <button id="start">Start Ranking</button>
+            <button id="startTim">Start Ranking (Partially Sorted)</button>
+            <button id="startHeap">Start Ranking (Legacy)</button>
             <div class="spacer"></div>
             <footer>
                 Copyright &copy; 2023 Brendan Lestander
@@ -35,10 +36,22 @@
         </div>
 
         <script defer>
-            const submitButton = document.getElementById('start');
-            submitButton.addEventListener('click', () => {
+            function extractItems() {
+                
                 const rawItems = document.getElementById('items').value;
                 const items = rawItems.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+                return items;
+            }
+
+            const timSubmitButton = document.getElementById('startTim');
+            timSubmitButton.addEventListener('click', () => {
+                const items = extractItems();
+                const params = new URLSearchParams({items: JSON.stringify(items)});
+                location.assign(`/tim/start.html?${params}`);
+            })
+            const heapSubmitButton = document.getElementById('startHeap');
+            heapSubmitButton.addEventListener('click', () => {
+                const items = extractItems();
                 const params = new URLSearchParams({items: JSON.stringify(items), i: 1, j: 1})
                 location.assign(`/heap/one.html?${params}`);
             });
