@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Performance Ranker</title>
+        <link rel="stylesheet" type="text/css" href="/styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script type="text/javascript" src="quick.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Performance Ranker</h1>
+            <p>A simple tool for turning a series of preference questions into a ranked list.</p>
+            <p id="current"></p>
+            <button id="greater"></button>
+            <button id="less"></button>
+            <p><a href="/">Reset</a></p>
+            <div class="spacer"></div>
+            <footer>
+                Copyright &copy; 2023 Brendan Lestander
+                <br />
+                Available under the <a href="/license.html">MIT License.</a>
+            </footer>
+        </div>
+
+        <script defer>
+            // Extract query params
+            const queryParams = new URLSearchParams(location.search);
+            const current = JSON.parse(queryParams.get('current'));
+            const insertable = JSON.parse(queryParams.get('insertable'));
+            const next = JSON.parse(queryParams.get('next'));
+            const i = Number.parseInt(queryParams.get('i'));
+            const j = Number.parseInt(queryParams.get('j'));
+
+            // Extract elements
+            const greaterButton = document.getElementById('greater');
+            const lessButton = document.getElementById('less');
+            const currentParagraph = document.getElementById('current');
+
+            // Populate elements
+            greaterButton.textContent = current[j];
+            lessButton.textContent = current[current.length - 1];
+            currentParagraph.textContent = `Current: ${current.join(', ')}`;
+
+            // Greater logic
+            greaterButton.addEventListener('click', () => {
+                const newJ = j - 1;
+                if (newJ < i) { // TODO
+                    console.debug(`i = j = ${i}`);
+                    const newCurrent = swap(current, i, current.length - 1);
+                    const leftArray = newCurrent.slice(0, i);
+                    const pivot = newCurrent.slice(i, i + 1);
+                    const rightArray = newCurrent.slice(i + 1);
+                    const newParams = new URLSearchParams({
+                        insertable: JSON.stringify(insertable),
+                        current: JSON.stringify(leftArray),
+                        next: JSON.stringify([pivot, rightArray, ...next]),
+                    });
+                    location.assign(`pivot.html?${newParams}`);
+                } else {
+                    const newParams = new URLSearchParams(location.search);
+                    newParams.set('j', newJ);
+                    location.assign(`?${newParams}`);
+                }
+            });
+
+            // Less logic
+            lessButton.addEventListener('click', () => {
+                const newCurrent = swap(current, i, j);
+                const newJ = j - 1;
+                const newI = i + 1;
+                const newParams = new URLSearchParams(location.search);
+                newParams.set('current', JSON.stringify(newCurrent));
+                newParams.set('i', newI);
+                newParams.set('j', newJ);
+                location.assign(`/quick/left.html?${newParams}`);
+            })
+        </script>
+    </body>
+</html>

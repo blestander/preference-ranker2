@@ -27,6 +27,14 @@
             if (currentItems.length > 7) {
                 const pivotIndex = Math.floor(Math.random() * currentItems.length);
                 const pivotingItems = swap(currentItems, pivotIndex, currentItems.length - 1);
+                const params = new URLSearchParams({
+                    current: JSON.stringify(pivotingItems),
+                    insertable: JSON.stringify([]),
+                    next: JSON.stringify([]),
+                    i: 0,
+                    j: currentItems.length - 2
+                });
+                location.replace(`/quick/left.html?${params}`);
             } else if (currentItems.length > 1) { // If we should just use insertion sort
                 const newParams = new URLSearchParams({
                     items: JSON.stringify(currentItems),
