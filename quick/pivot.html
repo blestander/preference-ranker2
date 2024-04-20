@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Performance Ranker</title>
+        <link rel="stylesheet" type="text/css" href="/styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Performance Ranker</h1>
+            <p>A simple tool for turning a series of preference questions into a ranked list.</p>
+            <p>Processing...</p>
+            <div class="spacer"></div>
+            <footer>
+                Copyright &copy; 2023 Brendan Lestander
+                <br />
+                Available under the <a href="/license.html">MIT License.</a>
+            </footer>
+        </div>
+
+        <script defer>
+            const queryParams = new URLSearchParams(location.search);
+            const insertable = JSON.parse(queryParams.get('insertable'));
+            const current = JSON.parse(queryParams.get('current'));
+            const next = JSON.parse(queryParams.get('next'));
+            console.debug(insertable, current, next);
+
+            if (current.length > 7) { // Worth partitioning
+                console.debug("Partition")
+            } else { // Just insertion sort
+                console.debug("Just insertion sort")
+                const newInsertable = insertable.slice();
+                newInsertable.push(...current);
+                if (next.length > 0) {// There is another array to process
+                    const newParams = new URLSearchParams({
+                        insertable: JSON.stringify(newInsertable),
+                        current: JSON.stringify(next[0]),
+                        next: JSON.stringify(next.slice(1)),
+                    });
+                    location.replace(`?${newParams}`);
+                } else {
+                    const newParams = new URLSearchParams({
+                        items: JSON.stringify(newInsertable),
+                        i: 1,
+                        j: 1,
+                    });
+                    location.replace(`insert.html?${newParams}`)
+                }
+            }
+        </script>
+    </body>
+</html>
