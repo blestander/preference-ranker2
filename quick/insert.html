@@ -11,7 +11,6 @@
         <div class="container">
             <h1>Performance Ranker</h1>
             <p>A simple tool for turning a series of preference questions into a ranked list.</p>
-            <p id="state"></p>
             <button id="swap"></button>
             <button id="stay"></button>
             <p><a href="/">Reset</a></p>
@@ -35,7 +34,6 @@
             // Populate buttons
             swapButton.textContent = currentItems[j - 1];
             stayButton.textContent = currentItems[j];
-            document.getElementById('state').textContent = `Current Items: ${currentItems.join(', ')}`;
 
             // Stay logic
             function advanceI(items) {

@@ -11,7 +11,6 @@
         <div class="container">
             <h1>Performance Ranker</h1>
             <p>A simple tool for turning a series of preference questions into a ranked list.</p>
-            <p id="current"></p>
             <button id="greater"></button>
             <button id="less"></button>
             <p><a href="/">Reset</a></p>
@@ -35,12 +34,10 @@
             // Extract elements
             const greaterButton = document.getElementById('greater');
             const lessButton = document.getElementById('less');
-            const currentParagraph = document.getElementById('current');
 
             // Populate elements
             greaterButton.textContent = current[j];
             lessButton.textContent = current[current.length - 1];
-            currentParagraph.textContent = `Current: ${current.join(', ')}`;
 
             // Greater logic
             greaterButton.addEventListener('click', () => {
