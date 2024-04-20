@@ -46,7 +46,7 @@
             const quickSubmitButton = document.getElementById('startQuick');
             quickSubmitButton.addEventListener('click', () => {
                 const items = extractItems();
-                const params = new URLSearchParams({current: JSON.stringify(items)});
+                const params = new URLSearchParams({items: JSON.stringify(items)});
                 location.assign(`/quick?${params}`)
             })
             const timSubmitButton = document.getElementById('startTim');

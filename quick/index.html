@@ -21,7 +21,7 @@
         </div>
 
         <script defer>
-            const currentItems = getCurrentItems();
+            const currentItems = JSON.parse(new URLSearchParams(location.search).get('items'));
             
             // If it's even worth partitioning
             if (currentItems.length > 7) {
